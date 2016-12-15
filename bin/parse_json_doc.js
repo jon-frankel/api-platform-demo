@@ -29,35 +29,32 @@ function getFactoryString(name, fields) {
     function ${_.classify(name)}Factory($http) {
         ${getPrivateAttributes(fields)}
         
-        var service = {};
+        let service = {};
         ${getPublicMethods(fields)}
         
         return service;
-    }
-`
-            // ${getFactoryMethods(fields)}
-    ;
+    }`;
 }
 
 function getPrivateAttributes (fields) {
-    var attributes = '';
+    let attributes = '';
 
     for (let f = 0; f < fields.length; f++) {
         attributes += `
-            _${fields[f]} = null;`;
+            let _${fields[f]} = null;`;
     }
 
     return attributes;
 }
 
 function getPublicMethods (fields) {
-    var attributes = '';
+    let attributes = '';
 
     for (let f = 0; f < fields.length; f++) {
+        attributes += f > 0 ? '\n' : '';
         attributes += `
-        
             service.${fields[f]} = function(field) {
-                return typeof field === 'undefined' ? service.${fields[f]} : service.${fields[f]} = field; 
+                return typeof field === 'undefined' ? _${fields[f]} : _${fields[f]} = field; 
             };`;
     }
 
