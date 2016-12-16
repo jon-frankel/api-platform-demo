@@ -91,3 +91,10 @@ api_platform:
         yaml:    ['application/x-yaml']
         csv:     ['text/csv']
         html:    ['text/html']
+
+assetic:
+    debug: "%kernel.debug%"
+    use_controller: "%kernel.debug%"
+    bundles: [AppBundle]
+    filters:
+        cssrewrite: ~

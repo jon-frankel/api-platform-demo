@@ -1,7 +1,9 @@
 api:
     resource: '.'
     type:     'api_platform'
+    prefix:   '/api'
 
 app:
-    resource: '@AppBundle/Action/'
+#    resource: '@AppBundle/Action/'
+    resource: '@AppBundle/Controller/'
     type:     'annotation'

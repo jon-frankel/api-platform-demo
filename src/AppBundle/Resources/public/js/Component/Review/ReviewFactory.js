@@ -129,6 +129,6 @@
             return deferred;
         };
 
-        return new ModelFactory(Model, 'review');
+        return new ModelFactory(Model, '/api/reviews');
     }
 })();
