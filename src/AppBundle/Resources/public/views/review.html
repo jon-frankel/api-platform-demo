@@ -1,7 +1,15 @@
 <div>
     <ul>
-        <li ng-repeat="review in reviewCtrl.allReviews">
-            {{ review.author }}
+        <li ng-repeat="review in reviews">
+            {{ review.author }}, {{ review.rating }}<br>
+            <form name="review{{review.id}}" ng-submit="review.put()">
+                <input type="text" ng-model="review.author">
+                <button type="submit">Submit Author</button>
+            </form>
+
         </li>
     </ul>
+    <p>{{ rootHello }}</p>
+    <p>{{ hello }}</p>
+    <p>{{ reviewCtrl.hello }}</p>
 </div>

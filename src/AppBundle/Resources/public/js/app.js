@@ -8,6 +8,7 @@
         .constant('_', _)
         .config(['$httpProvider', HttpConfig])
         .config(['$routeProvider', RouteConfig])
+        .run(['$rootScope', 'ReviewFactory', Initialize])
     ;
 
     function HttpConfig($httpProvider) {
@@ -15,7 +16,7 @@
     }
 
     function RouteConfig($routeProvider) {
-        var templatePrefix = 'bundles/app/views/';
+        var templatePrefix = '/bundles/app/views/';
 
         $routeProvider
             .when('/book', {
@@ -29,9 +30,17 @@
                 controllerAs: 'reviewCtrl'
             })
             .otherwise({
-                redirectTo: '/book'
+                redirectTo: '/review'
             })
         ;
     }
 
+    function Initialize($rootScope, ReviewFactory) {
+        ReviewFactory
+            .get()
+            .then(function (reviews) {
+                $rootScope.reviews = reviews;
+            })
+        ;
+    }
 })();

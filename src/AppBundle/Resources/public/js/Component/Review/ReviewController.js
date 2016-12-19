@@ -7,20 +7,14 @@
         .module('app')
         .controller(
             'ReviewController',
-            ['$scope', 'ReviewFactory', ReviewController]
+            ['$scope', '$rootScope', 'ReviewFactory', ReviewController]
         )
     ;
 
-    function ReviewController($scope, ReviewFactory) {
+    function ReviewController($scope, $rootScope, ReviewFactory) {
         var vm = this;
 
-        vm.reviews = [];
-
-        ReviewFactory
-            .get()
-            .then(function (reviews) {
-                vm.reviews = reviews;
-            })
-        ;
+        vm.hello = 'hello from the vm';
+        $scope.hello = 'hello from the $scope';
     }
 })();
