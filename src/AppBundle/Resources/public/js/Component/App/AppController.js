@@ -7,12 +7,12 @@
         .module('app')
         .controller(
             'AppController',
-            ['$rootScope', AppController]
+            ['$rootScope', '$location', AppController]
         )
     ;
 
-    function AppController($rootScope) {
+    function AppController($rootScope, $location) {
         var vm = this;
-        $rootScope.rootHello = 'hello from the $rootScope';
+        $rootScope.location = $location;
     }
 })();

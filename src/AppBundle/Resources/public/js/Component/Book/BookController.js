@@ -13,7 +13,5 @@
 
     function BookController($scope) {
         var vm = this;
-        
-        
     }
 })();

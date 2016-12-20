@@ -8,7 +8,7 @@
         .constant('_', _)
         .config(['$httpProvider', HttpConfig])
         .config(['$routeProvider', RouteConfig])
-        .run(['$rootScope', 'ReviewFactory', Initialize])
+        // .run(['ReviewFactory', 'BookFactory', Initialize])
     ;
 
     function HttpConfig($httpProvider) {
@@ -22,12 +22,22 @@
             .when('/book', {
                 templateUrl: templatePrefix + 'book.html',
                 controller: 'BookController',
-                controllerAs: 'bookCtrl'
+                controllerAs: 'bookCtrl',
+                resolve: {
+                    books: ['BookFactory', function (BookFactory) {
+                        return BookFactory.get();
+                    }]
+                }
             })
             .when('/review', {
                 templateUrl: templatePrefix + 'review.html',
                 controller: 'ReviewController',
-                controllerAs: 'reviewCtrl'
+                controllerAs: 'reviewCtrl',
+                resolve: {
+                    reviews: ['ReviewFactory', function (ReviewFactory) {
+                        return ReviewFactory.get();
+                    }]
+                }
             })
             .otherwise({
                 redirectTo: '/review'
@@ -35,12 +45,8 @@
         ;
     }
 
-    function Initialize($rootScope, ReviewFactory) {
-        ReviewFactory
-            .get()
-            .then(function (reviews) {
-                $rootScope.reviews = reviews;
-            })
-        ;
+    function Initialize(ReviewFactory, BookFactory) {
+        ReviewFactory.get();
+        BookFactory.get();
     }
 })();

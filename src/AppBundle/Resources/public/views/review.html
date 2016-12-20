@@ -6,10 +6,11 @@
                 <input type="text" ng-model="review.author">
                 <button type="submit">Submit Author</button>
             </form>
-
+            <br>
+            <button type="button" ng-click="review.book.get()">Show Book</button>
+            Title: {{ books[review.book.id()].title }}
+            <br><br>
         </li>
     </ul>
-    <p>{{ rootHello }}</p>
-    <p>{{ hello }}</p>
-    <p>{{ reviewCtrl.hello }}</p>
+    <button type="button" ng-click="location.path('/book')">Go To Books</button>
 </div>
