@@ -5,19 +5,34 @@
 (function () {
     angular
         .module('app')
-        .run(['$injector', '_', BindToString])
+        .run(['$injector', '$q', '_', BindToString])
     ;
 
-    function BindToString($injector, _) {
+    function BindToString($injector, $q, _) {
         String.prototype.get = function () {
-            var modelName = this.split('/')[2];
-            var factoryName = _.chain(modelName).singularize().titleize().value();
-            var factory = $injector.get(factoryName + 'Factory');
+            var pattern = /^\/api\/([\w\-\_]+)\/\d+$/g;
+            var matches = pattern.exec(this);
+
+            if (matches === null) {
+                var deferred = $q.defer();
+                deferred.reject({'error': this + ' does not describe an API endpoint'});
+                return deferred.promise;
+            }
+
+            var modelName = matches[1];
+            var factoryName = _.chain(modelName).singularize().classify().value() + 'Factory';
+            var factory = $injector.get(factoryName);
             return factory.get(this);
         };
 
         String.prototype.id = function () {
-            return this.split('/').pop();
+            var pattern = /^\/api\/[\w\-\_]+\/(\d+)$/g;
+            var matches = pattern.exec(this);
+            return matches === null ? this : matches[1];
+        };
+
+        Number.prototype.id = function () {
+            return this;
         };
     }
 })();

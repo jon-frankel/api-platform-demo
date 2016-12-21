@@ -8,17 +8,9 @@
     ;
 
     function RoutingService() {
-        this.coerceNumericId = function (id) {
-            if (typeof id === 'number') {
-                return id;
-            }
-
-            return Number(id.split('/').pop());
-        };
-
         this.path = function (modelName, modelId) {
             var uri = '/api/' + _.pluralize(modelName.toLowerCase());
-            uri += typeof modelId !== 'undefined' ? '/' + this.coerceNumericId(modelId) : '';
+            uri += typeof modelId !== 'undefined' ? '/' + modelId.id() : '';
             return uri;
         };
     }

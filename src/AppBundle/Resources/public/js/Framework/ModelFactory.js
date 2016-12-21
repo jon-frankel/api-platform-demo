@@ -11,6 +11,7 @@
         function Model() {
             var self = this;
 
+            this.allowedMethods = ['getItem', 'getCollection', 'put', 'post', 'delete'];
             this.modelName = '';
             this.id = null;
 
@@ -20,6 +21,11 @@
 
             this.reload = function () {
                 var deferred = $q.defer();
+
+                if (self.allowedMethods.indexOf('getItem') === -1) {
+                    deferred.reject({'error': 'Method GET not allowed on ' + self.modelName + ' items.'});
+                    return deferred.promise;
+                }
 
                 $http
                     .get(self.path(self.id))
@@ -37,6 +43,11 @@
             this.post = function () {
                 var deferred = $q.defer();
 
+                if (self.allowedMethods.indexOf('post') === -1) {
+                    deferred.reject({'error': 'Method GET not allowed on ' + self.modelName + ' items.'});
+                    return deferred.promise;
+                }
+                
                 $http
                     .post(self.path(), self)
                     .then(function (response) {
@@ -53,6 +64,11 @@
             this.put = function () {
                 var deferred = $q.defer();
 
+                if (self.allowedMethods.indexOf('put') === -1) {
+                    deferred.reject({'error': 'Method GET not allowed on ' + self.modelName + ' items.'});
+                    return deferred.promise;
+                }
+                
                 $http
                     .put(self.path(self.id), self)
                     .then(function (response) {
@@ -68,6 +84,11 @@
 
             this.delete = function () {
                 var deferred = $q.defer();
+
+                if (self.allowedMethods.indexOf('delete') === -1) {
+                    deferred.reject({'error': 'Method GET not allowed on ' + self.modelName + ' items.'});
+                    return deferred.promise;
+                }
 
                 $http
                     .delete(self.path(self.id))
