@@ -4,10 +4,12 @@
 (function () {
     angular
         .module('app')
-        .factory('CollectionFactory', ['$rootScope', '$http', '$q', 'RoutingService', '_', CollectionFactory])
+        .factory('CollectionFactory', [
+            '$rootScope', '$http', '$q', 'RoutingService', '_', 'EndpointService', CollectionFactory
+        ])
     ;
 
-    function CollectionFactory($rootScope, $http, $q, RoutingService, _) {
+    function CollectionFactory($rootScope, $http, $q, RoutingService, _, EndpointService) {
         function Collection (model) {
             var self = this;
 
@@ -27,7 +29,7 @@
                 var instance = new self.model();
 
                 if (typeof params !== 'undefined') {
-                    _.extend(instance, params);
+                    _.extend(instance, EndpointService.loadEndpoints(params));
                 }
 
                 return instance;

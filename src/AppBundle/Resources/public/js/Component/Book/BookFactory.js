@@ -23,6 +23,7 @@
         };
 
         BookModel.modelName = 'Book';
+        BookModel.allowedMethods = ['getItem', 'getCollection', 'put', 'post', 'delete'];
         BookModel.prototype = Object.create(ModelFactory);
         BookModel.constructor = BookModel;
 

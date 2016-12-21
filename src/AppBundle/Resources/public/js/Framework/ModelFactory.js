@@ -4,10 +4,12 @@
 (function () {
     angular
         .module('app')
-        .factory('ModelFactory', ['$rootScope', '$http', '$q', 'RoutingService', '_', ModelFactory])
+        .factory('ModelFactory', [
+            '$rootScope', '$http', '$q', 'RoutingService', '_', 'EndpointService', ModelFactory
+        ])
     ;
 
-    function ModelFactory($rootScope, $http, $q, RoutingService, _) {
+    function ModelFactory($rootScope, $http, $q, RoutingService, _, EndpointService) {
         function Model() {
             var self = this;
 
@@ -30,7 +32,7 @@
                 $http
                     .get(self.path(self.id))
                     .then(function (response) {
-                        _.extend(self, response.data);
+                        _.extend(self, EndpointService.loadEndpoints(response.data));
                         deferred.resolve(self);
                     }, function (error) {
                         deferred.reject(error);
@@ -51,7 +53,7 @@
                 $http
                     .post(self.path(), self)
                     .then(function (response) {
-                        _.extend(self, response.data);
+                        _.extend(self, EndpointService.loadEndpoints(response.data));
                         deferred.resolve(self);
                     }, function (error) {
                         deferred.reject(error);
@@ -72,7 +74,7 @@
                 $http
                     .put(self.path(self.id), self)
                     .then(function (response) {
-                        _.extend(self, response.data);
+                        _.extend(self, EndpointService.loadEndpoints(response.data));
                         deferred.resolve(self);
                     }, function (error) {
                         deferred.reject(error);
@@ -103,6 +105,8 @@
                 return deferred;
             };
         }
+
+        Model.allowedMethods = ['getItem', 'getCollection', 'put', 'post', 'delete'];
 
         return Model;
     }

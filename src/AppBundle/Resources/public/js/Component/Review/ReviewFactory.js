@@ -22,6 +22,7 @@
         };
 
         ReviewModel.modelName = 'Review';
+        ReviewModel.allowedMethods = ['getItem', 'getCollection', 'put', 'post', 'delete'];
         ReviewModel.prototype = Object.create(ModelFactory);
         ReviewModel.constructor = ReviewModel;
 
