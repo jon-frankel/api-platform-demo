@@ -48,7 +48,8 @@
         "doctrine/data-fixtures": "^1.1",
         "nelmio/alice": "^3.0@beta",
         "theofidry/alice-data-fixtures": "^1.0@beta",
-        "hautelook/alice-bundle": "^2.0@beta"
+        "hautelook/alice-bundle": "^2.0@beta",
+        "doctrine/doctrine-fixtures-bundle": "^2.3"
     },
     "scripts": {
         "post-install-cmd": [
