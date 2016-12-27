@@ -53,6 +53,9 @@
             return this.uri;
         };
 
+        Endpoint.prototype.toString = Endpoint.prototype.valueOf;
+        Endpoint.prototype.toJSON = Endpoint.prototype.valueOf;
+
         Endpoint.matchUri = matchUri;
 
         return Endpoint;

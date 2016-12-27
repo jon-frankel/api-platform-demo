@@ -27,12 +27,7 @@
 
             this.new = function (params) {
                 var instance = new self.model();
-
-                if (typeof params !== 'undefined') {
-                    _.extend(instance, EndpointService.loadEndpoints(params));
-                }
-
-                return instance;
+                return _.extend(instance, EndpointService.loadEndpoints(params));
             };
 
             this.get = function (id, forceReload) {
@@ -49,9 +44,9 @@
                 // check if the entity is cached in the root scope
                 else if (
                     !forceReload &&
-                    typeof $rootScope[self.collectionName][id.id()] !== 'undefined'
+                    typeof $rootScope[self.collectionName][id] !== 'undefined'
                 ) {
-                    deferred.resolve($rootScope[self.collectionName][id.id()]);
+                    deferred.resolve($rootScope[self.collectionName][id]);
                 }
 
                 // otherwise get the single item

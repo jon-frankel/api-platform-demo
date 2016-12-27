@@ -108,6 +108,9 @@
 
         Model.allowedMethods = ['getItem', 'getCollection', 'put', 'post', 'delete'];
 
+        // For some reason instances inherit the name property of the prototype object
+        Object.defineProperty(Model, 'name', {writable: true});
+
         return Model;
     }
 })();

@@ -6,11 +6,9 @@
         .module('app')
         .factory('ReviewFactory', ['CollectionFactory', 'ModelFactory', 'ReviewProperties', '_', ReviewFactory])
         .constant('ReviewProperties', {
+            itemReviewed: null,
             rating: null,
-            body: null,
-            author: null,
-            publicationDate: null,
-            book: null
+            reviewBody: null
         })
     ;
 

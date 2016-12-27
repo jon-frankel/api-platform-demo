@@ -7,10 +7,10 @@
         .factory('BookFactory', ['CollectionFactory', 'ModelFactory', 'BookProperties', '_', BookFactory])
         .constant('BookProperties', {
             isbn: null,
-            title: null,
+            name: null,
             description: null,
             author: null,
-            publicationDate: null,
+            dateCreated: null,
             reviews: null
         })
     ;

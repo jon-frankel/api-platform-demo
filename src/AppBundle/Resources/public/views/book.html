@@ -1,12 +1,11 @@
 <div>
     <ul>
         <li ng-repeat="book in books">
-            {{ book.title }} by {{ book.author }}<br>
+            {{ book.name }} by {{ book.author }}<br>
             <form name="book{{book.id}}" ng-submit="book.put()">
-                <input type="text" ng-model="book.title">
+                <input type="text" ng-model="book.name">
                 <button type="submit">Submit Title</button>
             </form>
-
         </li>
     </ul>
     <button type="button" ng-click="location.path('/review')">Go To Reviews</button>

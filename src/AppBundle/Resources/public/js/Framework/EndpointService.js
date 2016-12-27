@@ -10,17 +10,17 @@
 
     function EndpointService(_, EndpointFactory)
     {
-        function getNewEndpoint(uri) {
-            if (typeof uri === 'string' && EndpointFactory.matchUri(uri) !== null) {
-                return new EndpointFactory(uri);
-            } else if (Array.isArray(uri)) {
-                return _.each(uri, getNewEndpoint);
+        function getNewEndpoint(value) {
+            if (typeof value === 'string' && EndpointFactory.matchUri(value) !== null) {
+                value = new EndpointFactory(value);
+            } else if (Array.isArray(value)) {
+                value = _.map(value, getNewEndpoint);
             }
-            return uri;
+            return value;
         }
 
-        this.loadEndpoints = function (properties) {
-            return _.each(properties, getNewEndpoint);
+        this.loadEndpoints = function (instance) {
+            return _.mapObject(instance, getNewEndpoint);
         };
     }
 })();

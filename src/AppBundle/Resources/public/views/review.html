@@ -1,14 +1,14 @@
 <div>
     <ul>
         <li ng-repeat="review in reviews">
-            {{ review.author }}, {{ review.rating }}<br>
+            {{ review.reviewBody }}, {{ review.rating }}<br>
             <form name="review{{review.id}}" ng-submit="review.put()">
-                <input type="text" ng-model="review.author">
-                <button type="submit">Submit Author</button>
+                <input type="text" ng-model="review.reviewBody">
+                <button type="submit">Submit Review</button>
             </form>
             <br>
-            <button type="button" ng-click="review.book.get()">Show Book</button>
-            Title: {{ books[review.book.id()].title }}
+            <button type="button" ng-click="review.itemReviewed.get()">Show Book</button>
+            Title: {{ books[review.itemReviewed.id()].name }}
             <br><br>
         </li>
     </ul>
